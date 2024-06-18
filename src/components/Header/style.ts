@@ -31,12 +31,20 @@ export const Banner = styled.div`
   height: 150px;
   overflow: hidden;
   background: linear-gradient(90deg, #36231C 18.92%, #0b0b0b 50.56%, #36231C 80.88%);
- 
+  position: relative;
 
-  img{
-    width: 700px;
-    opacity: 1; /* Garantir que a opacidade da imagem seja total */
-    mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-  }
+`
+
+export const Burguer = styled.img`
+  width: 700px;
+  opacity: 1; 
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+`
+
+export const Logo = styled.img`
+  width: 188px;
+  height: 125.33px;
+  position: absolute;
+  opacity: .8;
 `

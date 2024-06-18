@@ -1,9 +1,10 @@
-
+import Input from '../../components/Input'
+import * as C from './style'
 
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <C.Container>
+      <Input />
+    </C.Container>
   )
 }

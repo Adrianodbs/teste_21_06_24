@@ -1,4 +1,5 @@
 import Burguer from '../../assets/img/burguer.jpg'
+import LogoImg from '../../assets/img/logo.svg'
 import * as C from './style'
 
 export default function Header() {
@@ -10,7 +11,8 @@ export default function Header() {
         <li>Contato</li>
       </ul>
       <C.Banner>
-        <img src={Burguer} alt="burguer" />
+        <C.Burguer src={Burguer} alt="burguer" />
+        <C.Logo src={LogoImg}/>
       </C.Banner>
     </C.Menu>
   )
