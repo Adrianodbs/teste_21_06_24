@@ -11,7 +11,7 @@ export const Menu = styled.header`
     align-items: center;
     list-style: none;
     padding: 12px;
-    background-color: #4F372F;
+    background-color: var(--navBackgroundColour);
     color: #fff;
     text-transform: uppercase;
 
@@ -35,12 +35,16 @@ export const Banner = styled.div`
 
 `
 
-export const Burguer = styled.img`
+export const Burguer = styled.div`
   width: 700px;
-  opacity: 1; 
+  height: 600px; 
+  background-image: var(--bannerImage);
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
   mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-`
+`;
 
 export const Logo = styled.img`
   width: 188px;
