@@ -15,19 +15,3 @@ export const Items = styled.div`
   flex-direction: column;
   width: 60%;
 `
-
-export const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 24px;
-`
-
-export const MenuItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-
-  
-`
