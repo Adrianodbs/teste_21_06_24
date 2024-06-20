@@ -55,7 +55,7 @@ export default function MenuItem() {
 
 
   return (
-    <div>
+    <C.Container>
       <C.Menu>
         {menuData ? (
         menuData.sections.map(section => (
@@ -143,7 +143,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
       </C.ContentItems>
-    </div>
+    </C.Container>
     
   )
 }

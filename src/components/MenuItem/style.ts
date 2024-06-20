@@ -1,5 +1,13 @@
 import styled from "styled-components"
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  background-color: #fff;
+  box-shadow: 0px 2px 14px 0px #00000024;
+`
+
 export const Menu = styled.div`
   display: flex;
   align-items: center;

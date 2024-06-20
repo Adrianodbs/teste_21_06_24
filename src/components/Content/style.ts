@@ -10,8 +10,8 @@ export const Container = styled.div`
 `
 
 export const Items = styled.div`
-  background-color: #fff;
   display: flex;
-  flex-direction: column;
-  width: 60%;
+  width: 100%;
+  gap: 12px;
+  justify-content: space-between;
 `
