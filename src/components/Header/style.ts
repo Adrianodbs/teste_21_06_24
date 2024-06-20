@@ -1,11 +1,52 @@
 import styled from "styled-components";
 
+interface MenuItemsProps {
+  isOpen: boolean;
+}
+
 export const Menu = styled.header`
   display: flex;
   flex-direction: column;
   width: 100%;
+`
 
-  ul{
+export const Nav = styled.div<MenuItemsProps>`
+@media (min-width: 768px) {
+    display: none;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  position: relative;
+  background-color: var(--navBackgroundColour);
+
+  p{
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21.09px;
+    color: #fff;
+    text-transform: uppercase;
+    display: ${props => (props.isOpen ? 'none' : 'block')};
+  }
+`;
+
+export const MenuIcon = styled.div<MenuItemsProps>`
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+
+  @media (max-width: 768px) {
+    display: block;
+    position: absolute;
+    right: 24px;
+    top: ${props => (props.isOpen ? '24px' : '8px')};
+  }
+`;
+
+export const MenuItems = styled.div<MenuItemsProps>`
+  ul {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,14 +56,27 @@ export const Menu = styled.header`
     color: #fff;
     text-transform: uppercase;
 
-    li{
+    li {
       font-weight: 300;
       font-size: 20px;
       line-height: 23.44px;
       padding: 0 48px;
     }
   }
-`
+
+  @media (max-width: 768px) {
+    ul {
+      display: ${props => (props.isOpen ? 'flex' : 'none')};
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0;
+    }
+
+    li {
+      padding: 12px 24px;
+    }
+  }
+`;
 
 export const Banner = styled.div`
   display: flex;
@@ -51,4 +105,5 @@ export const Logo = styled.img`
   height: 125.33px;
   position: absolute;
   opacity: .8;
+
 `
