@@ -1,19 +1,25 @@
 import {useEffect, useState} from 'react'
 import * as C from './style'
 import apiData from '../../services/api'
-import { MenuDataProps } from '../../interfaces/MenuData';
+import { MenuDataProps, MenuItemProps, MenuSectionProps } from '../../interfaces/MenuData';
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 
 export default function MenuItem() {
   const [menuData, setMenuData] = useState<MenuDataProps | null>(null);
+  const [burgerItems, setBurgerItems] = useState<MenuItemProps[]>([]);
+  const [drinkItems, setDrinkItems] = useState<MenuItemProps[]>([]);
+  const [dessertItems, setDessertItems] = useState<MenuItemProps[]>([]);
+  const [isBurgerVisible, setIsBurgerVisible] = useState(true);
+  const [isDrinkVisible, setIsDrinkVisible] = useState(true);
+  const [isDessertVisible, setIsDessertVisible] = useState(true);
 
   useEffect(()=>{
     async function fetchMenu (){
       try {
         const response = await apiData.get('/challenge/menu')
-        console.log('API Response:', response);
-
         setMenuData(response.data)
+
       } catch (error) {
         console.log(error)
       }
@@ -22,22 +28,123 @@ export default function MenuItem() {
     fetchMenu()
   }, [])
 
+  useEffect(() => {
+    if (menuData) {
+      const burgersSection = menuData.sections.find(
+        (section: MenuSectionProps) => section.name === "Burgers"
+      );
+      if (burgersSection) {
+        setBurgerItems(burgersSection.items);
+      }
+
+      const drinksSection = menuData.sections.find(
+        (section: MenuSectionProps) => section.name === "Drinks"
+      );
+      if (drinksSection) {
+        setDrinkItems(drinksSection.items);
+      }
+
+      const dessertsSection = menuData.sections.find(
+        (section: MenuSectionProps) => section.name === "Desserts"
+      );
+      if (dessertsSection) {
+        setDessertItems(dessertsSection.items);
+      }
+    }
+  }, [menuData]);
+
 
   return (
-    <C.Menu>
-      {menuData ? (
-      menuData.sections.map(section => (
-        <C.MenuItens key={section.id}>
-          {section.images && section.images.length > 0 && (
-            <img src={section.images[0].image} alt={section.name} />
+    <div>
+      <C.Menu>
+        {menuData ? (
+        menuData.sections.map(section => (
+          <C.MenuItens key={section.id}>
+            {section.images && section.images.length > 0 && (
+              <img src={section.images[0].image} alt={section.name} />
+            )}
+            <p>{section.name}</p>
+          </C.MenuItens>
+        ))
+      ) : (
+        <p>Loading...</p> 
+      )}
+      </C.Menu>
+      <C.ContentItems>
+        <C.SectionItem>
+        <h3 onClick={() => setIsBurgerVisible(!isBurgerVisible)}>
+          Burgers {isBurgerVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </h3>
+          {isBurgerVisible && (
+            burgerItems.length > 0 ? (
+              burgerItems.map((item) => (
+                <C.Item key={item.id}>
+                  <C.ItemInfo>
+                    <h4>{item.name}</h4>
+                    <p>{item.description}</p>
+                    <span>Price: ${item.price}</span>
+                  </C.ItemInfo>
+                  {item.images && item.images.length > 0 && (
+                    <img src={item.images[0].image} alt={item.name} />
+                  )}
+                </C.Item>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )
           )}
-          <p>{section.name}</p>
-        </C.MenuItens>
-      ))
-    ) : (
-      <p>Loading...</p> 
-    )}
-    </C.Menu>
+        </C.SectionItem>
+
+        <C.SectionItem>
+        <h3 onClick={() => setIsDrinkVisible(!isDrinkVisible)}>
+          Drinks {isDrinkVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </h3>
+          {isDrinkVisible && (
+            drinkItems.length > 0 ? (
+              drinkItems.map((item) => (
+                <C.Item key={item.id}>
+                  <C.ItemInfo>
+                    <h4>{item.name}</h4>
+                    <p>{item.description}</p>
+                    <span>Price: ${item.price}</span>
+                  </C.ItemInfo>
+                  {item.images && item.images.length > 0 && (
+                    <img src={item.images[0].image} alt={item.name} />
+                  )}
+                </C.Item>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )
+          )}
+        </C.SectionItem>
+
+        <C.SectionItem>
+        <h3 onClick={() => setIsDessertVisible(!isDessertVisible)}>
+          Desserts {isDessertVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
+        </h3>
+          {isDessertVisible && (
+            dessertItems.length > 0 ? (
+              dessertItems.map((item) => (
+                <C.Item key={item.id}>
+                  <C.ItemInfo>
+                    <h4>{item.name}</h4>
+                    <p>{item.description}</p>
+                    <span>Price: ${item.price}</span>
+                  </C.ItemInfo>
+                  {item.images && item.images.length > 0 && (
+                    <img src={item.images[0].image} alt={item.name} />
+                  )}
+                </C.Item>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )
+          )}
+        </C.SectionItem>
+      </C.ContentItems>
+    </div>
+    
   )
 }
 
