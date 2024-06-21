@@ -3,6 +3,26 @@ export interface MenuImageProps {
   image: string;
 }
 
+export interface MenuModifierItemProps {
+  id: number;
+  name: string;
+  price: number;
+  maxChoices: number;
+  position: number;
+  visible: number;
+  availabilityType: string;
+  qty?: number;
+  available: boolean;
+}
+
+export interface MenuModifierProps {
+  id: number;
+  name: string;
+  minChoices: number;
+  maxChoices: number;
+  items: MenuModifierItemProps[];
+}
+
 export interface MenuItemProps{
   id: number;
   image: string;
@@ -10,6 +30,7 @@ export interface MenuItemProps{
   description?: string;
   price: number;
   images: MenuImageProps[];
+  modifiers?: MenuModifierProps[];
 }
 
 export interface MenuSectionProps {

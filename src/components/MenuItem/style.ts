@@ -60,6 +60,7 @@ export const Item = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 8px;
+  cursor: pointer;
 `
 
 export const ItemInfo = styled.div`
