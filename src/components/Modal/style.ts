@@ -20,8 +20,10 @@ export const Container = styled.div`
 
 export const ModalContent = styled.div<InfoProps>`
   position: fixed;
-  width: 480px;
-  height: 540px;
+  max-width: 480px;
+  width: 90%;
+  max-height: 540px;
+  height: 93%;
   top: 6%  ;
   left: 0;
   right: 0;

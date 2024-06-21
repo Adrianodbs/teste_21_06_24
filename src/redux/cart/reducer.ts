@@ -8,7 +8,6 @@ interface ActionProps {
 
 interface CartStateProps {
   products: MenuItemProps[];
-  totalPrice: number;
 }
 
 const initialState:CartStateProps = {

@@ -14,4 +14,8 @@ export const Items = styled.div`
   width: 100%;
   gap: 12px;
   justify-content: space-between;
+
+  @media (max-width: 768px){
+    flex-direction: column;
+  }
 `

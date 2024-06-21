@@ -7,6 +7,10 @@ export const Container = styled.div`
   background-color: #fff;
   box-shadow: 0px 2px 14px 0px #00000024;
   padding: 12px;
+
+  @media (max-width: 768px){
+    width: 100%;
+  }
 `
 
 export const Menu = styled.div`
@@ -54,6 +58,11 @@ export const SectionItem = styled.div`
     width: 128px;
     height: 85px;
     border-radius: 6px;
+
+    @media (max-width: 768px){
+      width: 112px;
+      height: 64px;
+    }
   }
 `
 
