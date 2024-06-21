@@ -70,17 +70,6 @@ export const Info = styled.div`
     color: #464646;
   }
 
-  button{
-    border: none;
-    background-color: #4F372F;
-    border-radius: 24px;
-    height: 48px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
   .size{
     p{
       font-weight: 700;

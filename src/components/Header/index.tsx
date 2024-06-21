@@ -5,7 +5,7 @@ import * as C from './style'
 
 import {  useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/rootReducer';
-import { login, logout } from '../../redux/actions';
+import { login, logout } from '../../redux/user/actions';
 
 
 

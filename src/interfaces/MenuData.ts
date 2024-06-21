@@ -31,6 +31,7 @@ export interface MenuItemProps{
   price: number;
   images: MenuImageProps[];
   modifiers?: MenuModifierProps[];
+  quantity?: number
 }
 
 export interface MenuSectionProps {

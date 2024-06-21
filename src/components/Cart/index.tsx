@@ -1,31 +1,23 @@
-import styled from "styled-components"
+import { RootState } from '../../redux/rootReducer';
+import Button from '../Button';
+import CartItem from '../CartItem';
+import * as C from './style'
+
+import {useSelector} from 'react-redux'
 
 export default function Cart() {
+  const { products } = useSelector((state: RootState) => state.cartReducer);
   return (
-    <Container>
+    <C.Container>
       <h3>Carrinho</h3>
       <div>
-        <p>Seu carrinho está vazio</p>
+        {products.map(product => (
+          product ? <CartItem key={product.id} product={product} /> : null
+        ))}
       </div>
-    </Container>
+      <Button>Checkout now</Button>
+    </C.Container>
   )
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  align-items: center;
-  width: 35%;
-  height: 130px;
-  box-shadow: 0px 2px 14px 0px #00000026;
-  
-  h3{
-    background-color: #F8F9FA;
-    font-weight: 500;
-    font-size: 24px;
-    color: #464646;
-    width: 100%;
-    padding: 16px;
-  }
-`
+

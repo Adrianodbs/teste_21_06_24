@@ -4,6 +4,10 @@ import CloseIcon from '../../assets/img/close.svg'
 import Minus from '../../assets/img/Minus_btn.svg'
 import Plus from '../../assets/img/plus_btn.svg'
 
+import {useDispatch} from 'react-redux'
+import { addProductToCart } from "../../redux/cart/actions";
+import Button from "../Button";
+
 
 interface ModalProps {
   item: MenuItemProps | null;
@@ -11,10 +15,17 @@ interface ModalProps {
 }
 
 export default function Modal({ item, onClose }: ModalProps) {
+  const dispatch = useDispatch()
   if (!item) return null;
 
   const hasMultipleOptions = item.modifiers && item.modifiers.some(modifier => modifier.items.length > 1) || false;
   const hasImage = item.images && item.images.length > 0;
+
+  
+  const handleAddProduct = () => {
+    dispatch(addProductToCart(item))
+  }
+
   return (
     <C.Container>
       <C.ModalContent hasImage={hasImage}>
@@ -57,7 +68,7 @@ export default function Modal({ item, onClose }: ModalProps) {
               <span>1</span>
             <img src={Plus} alt="plus"/>
           </C.Count>
-          <button>Add to order • ${item.price}</button> 
+          <Button onClick={handleAddProduct}>Add to order • ${item.price}</Button>
         </C.Info>
         
        
