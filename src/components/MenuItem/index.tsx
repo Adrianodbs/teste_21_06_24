@@ -3,6 +3,7 @@ import * as C from './style'
 import apiData from '../../services/api'
 import { MenuDataProps, MenuItemProps, MenuSectionProps } from '../../interfaces/MenuData';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import Modal from '../Modal';
 
 
 export default function MenuItem() {
@@ -13,6 +14,8 @@ export default function MenuItem() {
   const [isBurgerVisible, setIsBurgerVisible] = useState(true);
   const [isDrinkVisible, setIsDrinkVisible] = useState(true);
   const [isDessertVisible, setIsDessertVisible] = useState(true);
+  const [selectedItem, setSelectedItem] = useState<MenuItemProps | null>(null); 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(()=>{
     async function fetchMenu (){
@@ -53,6 +56,16 @@ export default function MenuItem() {
     }
   }, [menuData]);
 
+  const handleItemClick = (item: MenuItemProps) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedItem(null);
+  };
+
 
   return (
     <C.Container>
@@ -78,7 +91,7 @@ export default function MenuItem() {
           {isBurgerVisible && (
             burgerItems.length > 0 ? (
               burgerItems.map((item) => (
-                <C.Item key={item.id}>
+                <C.Item key={item.id} onClick={() => handleItemClick(item)}>
                   <C.ItemInfo>
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
@@ -102,7 +115,7 @@ export default function MenuItem() {
           {isDrinkVisible && (
             drinkItems.length > 0 ? (
               drinkItems.map((item) => (
-                <C.Item key={item.id}>
+                <C.Item key={item.id} onClick={() => handleItemClick(item)}>
                   <C.ItemInfo>
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
@@ -126,7 +139,7 @@ export default function MenuItem() {
           {isDessertVisible && (
             dessertItems.length > 0 ? (
               dessertItems.map((item) => (
-                <C.Item key={item.id}>
+                <C.Item key={item.id} onClick={() => handleItemClick(item)}>
                   <C.ItemInfo>
                     <h4>{item.name}</h4>
                     <p>{item.description}</p>
@@ -143,6 +156,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
       </C.ContentItems>
+      {isModalOpen && <Modal item={selectedItem} onClose={handleCloseModal} />}
     </C.Container>
     
   )
