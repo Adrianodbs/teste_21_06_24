@@ -17,3 +17,5 @@ export const Container = styled.div`
     padding: 16px;
   }
 `
+
+export const CartTotal = styled.div``

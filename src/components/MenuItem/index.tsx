@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from 'react'
+import {useEffect, useState} from 'react'
 import * as C from './style'
 import apiData from '../../services/api'
 import { MenuDataProps, MenuItemProps, MenuSectionProps } from '../../interfaces/MenuData';
@@ -7,7 +7,8 @@ import Modal from '../Modal';
 import Button from '../Button';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/rootReducer';
+// import { RootState } from '../../redux/rootReducer';
+import { selectProductsCount } from '../../redux/cart/cart.Selector';
 
 
 export default function MenuItem() {
@@ -21,11 +22,10 @@ export default function MenuItem() {
   const [selectedItem, setSelectedItem] = useState<MenuItemProps | null>(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { products } = useSelector((state: RootState) => state.cartReducer);
+  // const { products } = useSelector((state: RootState) => state.cartReducer);
 
-  const productCount = useMemo(() => {
-    return products.reduce((acc, curr) => acc + (curr.quantity ?? 0), 0);
-  }, [products]);
+  const productsCount = useSelector(selectProductsCount)
+
 
   useEffect(()=>{
     async function fetchMenu (){
@@ -166,7 +166,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
       </C.ContentItems>
-      <Button>Your basket • {productCount} {productCount === 1 ? 'item' : 'items'}</Button>
+      <Button>Your basket • {productsCount} {productsCount === 1 ? 'item' : 'items'}</Button>
       {isModalOpen && <Modal item={selectedItem} onClose={handleCloseModal} />}
     </C.Container>
     

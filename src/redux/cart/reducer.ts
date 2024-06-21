@@ -13,7 +13,6 @@ interface CartStateProps {
 
 const initialState:CartStateProps = {
   products: [],
-  totalPrice: 0
 }
 
 const cartReducer = (state = initialState, action: ActionProps) => {
