@@ -3,12 +3,31 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import LogoImg from '../../assets/img/logo.svg'
 import * as C from './style'
 
+import {  useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../redux/rootReducer';
+import { login, logout } from '../../redux/actions';
+
+
+
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { currentUser } = useSelector((state: RootState) => state.userReducer);
+  console.log(currentUser)
+  const dispatch = useDispatch()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogin = () =>{
+    dispatch(login({name: "User"}))
+  }
+  
+  const handleLogout = () =>{
+    dispatch(logout())
+  }
 
   return ( 
     <C.Menu>
@@ -21,7 +40,11 @@ export default function Header() {
       <C.MenuItems isOpen={isOpen}>
         <ul>
           <li>Menu</li>
-          <li>Entrar</li>
+          {currentUser ? (
+            <li onClick={handleLogout}>Sair</li>
+          ): (
+            <li onClick={handleLogin}>Entrar</li>
+          )}         
           <li>Contato</li>
         </ul>
       </C.MenuItems>

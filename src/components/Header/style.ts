@@ -61,6 +61,7 @@ export const MenuItems = styled.div<MenuItemsProps>`
       font-size: 20px;
       line-height: 23.44px;
       padding: 0 48px;
+      cursor: pointer;
     }
   }
 
