@@ -45,3 +45,5 @@ export const Price = styled.p`
   color: #121212;
 `
 
+
+

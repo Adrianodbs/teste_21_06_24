@@ -166,7 +166,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
       </C.ContentItems>
-      <Button>Your basket • ({productCount})</Button>
+      <Button>Your basket • {productCount} {productCount === 1 ? 'item' : 'items'}</Button>
       {isModalOpen && <Modal item={selectedItem} onClose={handleCloseModal} />}
     </C.Container>
     

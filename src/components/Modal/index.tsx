@@ -5,8 +5,9 @@ import Minus from '../../assets/img/Minus_btn.svg'
 import Plus from '../../assets/img/plus_btn.svg'
 
 import {useDispatch} from 'react-redux'
-import { addProductToCart } from "../../redux/cart/actions";
+import { addProductToCart} from "../../redux/cart/actions";
 import Button from "../Button";
+import { useState } from "react";
 
 
 interface ModalProps {
@@ -15,6 +16,7 @@ interface ModalProps {
 }
 
 export default function Modal({ item, onClose }: ModalProps) {
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch()
   if (!item) return null;
 
@@ -23,7 +25,19 @@ export default function Modal({ item, onClose }: ModalProps) {
 
   
   const handleAddProduct = () => {
-    dispatch(addProductToCart(item))
+    const itemWithQuantity = { ...item, quantity }; 
+    dispatch(addProductToCart(itemWithQuantity));
+    onClose(); 
+  }
+
+  const incrementCount = () => {
+    setQuantity(quantity + 1);
+  }
+
+  const decrementCount = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
   }
 
   return (
@@ -64,9 +78,13 @@ export default function Modal({ item, onClose }: ModalProps) {
           )}
           
           <C.Count>
-            <img src={Minus} alt="minus"/>
-              <span>1</span>
-            <img src={Plus} alt="plus"/>
+            <button onClick={decrementCount}>
+              <img src={Minus} alt="minus"/>
+            </button>         
+            <span>{quantity}</span> 
+            <button onClick={incrementCount}>
+              <img src={Plus} alt="plus"/>  
+            </button>
           </C.Count>
           <Button onClick={handleAddProduct}>Add to order • ${item.price}</Button>
         </C.Info>
