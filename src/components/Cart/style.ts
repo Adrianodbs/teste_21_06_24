@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #fff;
+  background-color: #F8F9FA;
   width: 35%;
   box-shadow: 0px 2px 14px 0px #00000026;
   display: flex;
@@ -9,7 +9,6 @@ export const Container = styled.div`
 
   
   h3{
-    background-color: #F8F9FA;
     font-weight: 500;
     font-size: 24px;
     color: #464646;
@@ -18,4 +17,37 @@ export const Container = styled.div`
   }
 `
 
+export const Items = styled.div`
+  background-color: #fff;
+`
+
 export const CartTotal = styled.div``
+
+export const SubTotal = styled.span`
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #cacaca;
+  font-weight: 500;
+  font-size: 18px;
+  color: #121212;
+
+  p{
+    font-weight: 400;
+    font-size: 16px;
+  }
+`
+
+export const Total = styled.span`
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  color: #121212;
+  font-weight: 500;
+  font-size: 24px;
+
+  p{
+    font-weight: 300;
+    font-size: 24px;
+  }
+`

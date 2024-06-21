@@ -12,13 +12,18 @@ export default function Cart() {
   return (
     <C.Container>
       <h3>Carrinho</h3>
-      <div>
+      <C.Items>
         {products.map(product => (
           product ? <CartItem key={product.id} product={product} /> : null
         ))}
-      </div>
+      </C.Items>
       <C.CartTotal>
-        <span>R${totalPrice}</span>
+        <C.SubTotal>
+          <p>Sub Total</p> R${totalPrice}
+        </C.SubTotal>
+        <C.Total>
+          <p>Total</p> R${totalPrice}
+        </C.Total>
       </C.CartTotal>
       <Button>Checkout now</Button>
     </C.Container>

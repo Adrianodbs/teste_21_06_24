@@ -6,6 +6,7 @@ export const Container = styled.div`
   width: 60%;
   background-color: #fff;
   box-shadow: 0px 2px 14px 0px #00000024;
+  padding: 12px;
 `
 
 export const Menu = styled.div`
