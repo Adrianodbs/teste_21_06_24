@@ -5,17 +5,12 @@ export const Container = styled.div`
   width: 90%;
   background-color: #F8F9FA;
   display: flex;
+  justify-content: space-between;
   padding: 24px;
   gap: 12px;
-`
-
-export const Items = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 12px;
-  justify-content: space-between;
 
   @media (max-width: 768px){
     flex-direction: column;
   }
 `
+

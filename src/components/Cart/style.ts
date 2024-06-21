@@ -6,12 +6,12 @@ export const Container = styled.div`
   box-shadow: 0px 2px 14px 0px #00000026;
   display: flex;
   flex-direction: column;
+  height: auto;
 
   @media (max-width: 768px){
     width: 100%;
   }
 
-  
   h3{
     font-weight: 500;
     font-size: 24px;
@@ -23,6 +23,7 @@ export const Container = styled.div`
 
 export const Items = styled.div`
   background-color: #fff;
+ 
 `
 
 export const CartTotal = styled.div``
@@ -65,4 +66,9 @@ export const ButtonContainer = styled.div`
     display: flex;
     margin-bottom: 12px;
   }
+`
+
+export const EmptyMessage = styled.div`
+  background-color: #fff;
+  padding: 30px 16px;
 `

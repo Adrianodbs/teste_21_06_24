@@ -12,22 +12,28 @@ export default function Cart() {
   return (
     <C.Container>
       <h3>Carrinho</h3>
-      <C.Items>
-        {products.map(product => (
-          product ? <CartItem key={product.id} product={product} /> : null
-        ))}
-      </C.Items>
-      <C.CartTotal>
-        <C.SubTotal>
-          <p>Sub Total</p> R${totalPrice}
-        </C.SubTotal>
-        <C.Total>
-          <p>Total</p> R${totalPrice}
-        </C.Total>
-      </C.CartTotal>
-      <C.ButtonContainer>
-        <Button>Checkout now</Button>
-      </C.ButtonContainer>
+      {products.length > 0 ? (
+        <>
+          <C.Items>
+            {products.map(product => (
+              product ? <CartItem key={product.id} product={product} /> : null
+            ))}
+          </C.Items>
+          <C.CartTotal>
+            <C.SubTotal>
+              <p>Sub Total</p> R${totalPrice}
+            </C.SubTotal>
+            <C.Total>
+              <p>Total</p> R${totalPrice}
+            </C.Total>
+          </C.CartTotal>
+          <C.ButtonContainer>
+            <Button>Checkout now</Button>
+          </C.ButtonContainer>
+        </>
+      ) : (
+        <C.EmptyMessage>Seu carrinho está vazio</C.EmptyMessage>
+      )}
     </C.Container>
   )
 }
