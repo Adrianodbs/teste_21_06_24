@@ -25,7 +25,9 @@ export default function Cart() {
           <p>Total</p> R${totalPrice}
         </C.Total>
       </C.CartTotal>
-      <Button>Checkout now</Button>
+      <C.ButtonContainer>
+        <Button>Checkout now</Button>
+      </C.ButtonContainer>
     </C.Container>
   )
 }

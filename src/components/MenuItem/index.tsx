@@ -6,8 +6,11 @@ import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import Modal from '../Modal';
 import Button from '../Button';
 
+import BurguerImage from '../../assets/img/burguer.jpg'
+import DrinkImage from '../../assets/img/drink.svg';
+import DessertImage from '../../assets/img/dessert.svg';
+
 import { useSelector } from 'react-redux';
-// import { RootState } from '../../redux/rootReducer';
 import { selectProductsCount } from '../../redux/cart/cart.Selector';
 
 
@@ -21,8 +24,6 @@ export default function MenuItem() {
   const [isDessertVisible, setIsDessertVisible] = useState(true);
   const [selectedItem, setSelectedItem] = useState<MenuItemProps | null>(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // const { products } = useSelector((state: RootState) => state.cartReducer);
 
   const productsCount = useSelector(selectProductsCount)
 
@@ -83,9 +84,9 @@ export default function MenuItem() {
         {menuData ? (
         menuData.sections.map(section => (
           <C.MenuItens key={section.id}>
-            {section.images && section.images.length > 0 && (
-              <img src={section.images[0].image} alt={section.name} />
-            )}
+            {section.name === 'Burgers' && <img src={BurguerImage} alt="Burger" />}
+            {section.name === 'Drinks' && <img src={DrinkImage} alt="Drink" />}
+            {section.name === 'Desserts' && <img src={DessertImage} alt="Dessert" />}
             <p>{section.name}</p>
           </C.MenuItens>
         ))
@@ -166,7 +167,10 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
       </C.ContentItems>
-      <Button>Your basket • {productsCount} {productsCount === 1 ? 'item' : 'items'}</Button>
+      <C.ButtonContainer>
+        <Button>Your basket • {productsCount} {productsCount === 1 ? 'item' : 'items'}</Button>
+      </C.ButtonContainer>
+      
       {isModalOpen && <Modal item={selectedItem} onClose={handleCloseModal} />}
     </C.Container>
     

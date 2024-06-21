@@ -101,4 +101,15 @@ export const ItemInfo = styled.div`
   }
 `
 
+export const ButtonContainer = styled.div`
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px){
+    display: flex;
+    margin-bottom: 12px;
+  }
+`
+
 

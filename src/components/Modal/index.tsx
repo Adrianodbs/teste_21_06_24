@@ -7,7 +7,7 @@ import Plus from '../../assets/img/plus_btn.svg'
 import {useDispatch} from 'react-redux'
 import { addProductToCart} from "../../redux/cart/actions";
 import Button from "../Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 interface ModalProps {
@@ -16,19 +16,29 @@ interface ModalProps {
 }
 
 export default function Modal({ item, onClose }: ModalProps) {
+  useEffect(() => {
+    if (item) {
+      setSelectedModifierPrice(item.price);
+    }
+  }, [item]);
   const [quantity, setQuantity] = useState(1);
+  const [selectedModifierPrice, setSelectedModifierPrice] = useState(item ? item.price : 0);
   const dispatch = useDispatch()
   if (!item) return null;
 
   const hasMultipleOptions = item.modifiers && item.modifiers.some(modifier => modifier.items.length > 1) || false;
   const hasImage = item.images && item.images.length > 0;
 
+  const handleModifierChange = (price: number) => {
+    setSelectedModifierPrice(price);
+  };
+
   
   const handleAddProduct = () => {
-    const itemWithQuantity = { ...item, quantity }; 
+    const itemWithQuantity = { ...item, quantity, price: selectedModifierPrice }; 
     dispatch(addProductToCart(itemWithQuantity));
     onClose(); 
-  }
+  };
 
   const incrementCount = () => {
     setQuantity(quantity + 1);
@@ -69,7 +79,7 @@ export default function Modal({ item, onClose }: ModalProps) {
                       <label htmlFor={`option-${option.id}`}>
                         {option.name} <span>R$ {option.price.toFixed(2)}</span> 
                       </label>
-                      <input type="radio" id={`option-${option.id}`} name={`modifier-${modifier.id}`} />             
+                      <input type="radio" id={`option-${option.id}`} name={`modifier-${modifier.id}`} onChange={() => handleModifierChange(option.price)} />             
                     </div>
                   ))}
                 </div>
@@ -86,7 +96,7 @@ export default function Modal({ item, onClose }: ModalProps) {
               <img src={Plus} alt="plus"/>  
             </button>
           </C.Count>
-          <Button onClick={handleAddProduct}>Add to order • ${item.price}</Button>
+          <Button onClick={handleAddProduct}>Add to order • R$ {selectedModifierPrice.toFixed(2)}</Button>
         </C.Info>
         
        
