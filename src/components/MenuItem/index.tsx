@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useRef} from 'react'
 import * as C from './style'
 import apiData from '../../services/api'
 import { MenuDataProps, MenuItemProps, MenuSectionProps } from '../../interfaces/MenuData';
@@ -26,6 +26,10 @@ export default function MenuItem() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const productsCount = useSelector(selectProductsCount)
+
+  const burgerSectionRef = useRef<HTMLDivElement>(null);
+  const drinkSectionRef = useRef<HTMLDivElement>(null);
+  const dessertSectionRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(()=>{
@@ -77,13 +81,23 @@ export default function MenuItem() {
     setSelectedItem(null);
   };
 
+  const handleSectionClick = (sectionName: string) => {
+    if (sectionName === "Burgers" && burgerSectionRef.current) {
+      burgerSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (sectionName === "Drinks" && drinkSectionRef.current) {
+      drinkSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (sectionName === "Desserts" && dessertSectionRef.current) {
+      dessertSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
 
   return (
     <C.Container>
       <C.Menu>
         {menuData ? (
         menuData.sections.map(section => (
-          <C.MenuItens key={section.id}>
+          <C.MenuItens key={section.id} onClick={() => handleSectionClick(section.name)}>
             {section.name === 'Burgers' && <img src={BurguerImage} alt="Burger" />}
             {section.name === 'Drinks' && <img src={DrinkImage} alt="Drink" />}
             {section.name === 'Desserts' && <img src={DessertImage} alt="Dessert" />}
@@ -95,7 +109,7 @@ export default function MenuItem() {
       )}
       </C.Menu>
       <C.ContentItems>
-        <C.SectionItem>
+        <C.SectionItem ref={burgerSectionRef}>
         <h3 onClick={() => setIsBurgerVisible(!isBurgerVisible)}>
           Burgers {isBurgerVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </h3>
@@ -119,7 +133,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
 
-        <C.SectionItem>
+        <C.SectionItem ref={drinkSectionRef}>
         <h3 onClick={() => setIsDrinkVisible(!isDrinkVisible)}>
           Drinks {isDrinkVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </h3>
@@ -143,7 +157,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
 
-        <C.SectionItem>
+        <C.SectionItem ref={dessertSectionRef}>
         <h3 onClick={() => setIsDessertVisible(!isDessertVisible)}>
           Desserts {isDessertVisible ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </h3>

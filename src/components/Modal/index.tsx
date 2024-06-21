@@ -41,14 +41,12 @@ export default function Modal({ item, onClose }: ModalProps) {
   };
 
   const incrementCount = () => {
-    setQuantity(quantity + 1);
-  }
+    setQuantity(prevQuantity => prevQuantity + 1);
+  };
 
   const decrementCount = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  }
+    setQuantity(prevQuantity => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+  };
 
   return (
     <C.Container>
