@@ -1,9 +1,13 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import * as C from './style'
 import apiData from '../../services/api'
 import { MenuDataProps, MenuItemProps, MenuSectionProps } from '../../interfaces/MenuData';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import Modal from '../Modal';
+import Button from '../Button';
+
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/rootReducer';
 
 
 export default function MenuItem() {
@@ -16,6 +20,12 @@ export default function MenuItem() {
   const [isDessertVisible, setIsDessertVisible] = useState(true);
   const [selectedItem, setSelectedItem] = useState<MenuItemProps | null>(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { products } = useSelector((state: RootState) => state.cartReducer);
+
+  const productCount = useMemo(() => {
+    return products.reduce((acc, curr) => acc + (curr.quantity ?? 0), 0);
+  }, [products]);
 
   useEffect(()=>{
     async function fetchMenu (){
@@ -156,6 +166,7 @@ export default function MenuItem() {
           )}
         </C.SectionItem>
       </C.ContentItems>
+      <Button>Your basket • ({productCount})</Button>
       {isModalOpen && <Modal item={selectedItem} onClose={handleCloseModal} />}
     </C.Container>
     
