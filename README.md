@@ -21,5 +21,5 @@ Redux:
   -store: Configura e exporta a store Redux, utilizando middleware para registrar mudanças de estado durante o desenvolvimento.
 
 services:
-  -API: Problemas com CORS levaram à necessidade de configurar o endpoint no arquivo vite.config.ts para fazer fetch dos dados via Axios.
+  -API: Problemas com CORS levaram à necessidade de configurar o endpoint no arquivo vite.config.ts para fazer fetch dos dados via Axios, como segurança, deixamos um arquivo com dados estáticos, caso a API não seja carregada.
 

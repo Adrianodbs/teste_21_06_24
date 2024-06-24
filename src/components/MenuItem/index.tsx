@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef} from 'react'
 import * as C from './style'
-import apiData from '../../services/api'
+import { fetchMenuData } from '../../services/api'
 import { MenuDataProps, MenuItemProps, MenuSectionProps } from '../../interfaces/MenuData';
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import Modal from '../Modal';
@@ -32,19 +32,14 @@ export default function MenuItem() {
   const dessertSectionRef = useRef<HTMLDivElement>(null);
 
 
-  useEffect(()=>{
-    async function fetchMenu (){
-      try {
-        const response = await apiData.get('/challenge/menu')
-        setMenuData(response.data)
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchMenuData();
+      setMenuData(data);
+    };
 
-      } catch (error) {
-        console.log(error)
-      }
-    }
-
-    fetchMenu()
-  }, [])
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (menuData) {
