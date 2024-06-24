@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env': {
-      NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || '/api',
+      NEXT_PUBLIC_API_URL: JSON.stringify(process.env.NEXT_PUBLIC_API_URL || '/api'),
     },
   },
   server: {
